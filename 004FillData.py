@@ -18,6 +18,7 @@ books = pd.read_excel('./TestExcel/output004.xlsx', skiprows=16, usecols="E:H",
 startTime = date(2021, 12, 25)
 for i in books.index:
     books['ID'].at[i] = i + 1
+    print(type(books['ID']))  # 此种写法books['ID']是pandas.core.series.Series对象
     books['InStore'].at[i] = 'Yes' if i % 2 == 0 else 'NO'  # 在Python中if else可以组成表达式用
     # books['Date'].at[i] = startTime + timedelta(days=i)  # 天数依次累加
     # books['Date'].at[i] = date(startTime.year+i,startTime.month,startTime.day)  # 年份依次累加
