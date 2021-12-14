@@ -8,7 +8,7 @@ books.plot.bar(x='Field', y=[2020, 2021],color=['orange','blue'])
 plt.title('National Books', fontsize=16, fontweight='bold')
 plt.xlabel('Field', fontweight='bold')
 plt.ylabel('Number', fontweight='bold')
-# 自定义X轴样式:斜45° 文字最末端对齐
+# 自定义X轴样式:斜45° 文字最末端-对齐
 ax = plt.gca()
 ax.set_xticklabels(books.Field, rotation=45, ha='right')
 # 将图片左边和底部固定
