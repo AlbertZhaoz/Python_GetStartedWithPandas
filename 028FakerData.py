@@ -2,7 +2,8 @@ import pandas as pd
 from faker import Faker
 import random as rd
 
-fake = Faker("zh-CN")
+fake = Faker()
+# fake = Faker('zh-CN')
 
 # 要输入到DF中的数据字典
 dic = {}
@@ -24,10 +25,11 @@ list_str =[]
 # 随机年龄
 list_age = []
 # 随机金额
-list_money = []
+list_money_last = []
+list_money_current = []
 # 索引
 list_index = []
-for i in range(0,1000):
+for i in range(0,2000):
     list_index.append(i)
     list_name.append(fake.name())
     list_phone_number.append(fake.phone_number())
@@ -37,7 +39,8 @@ for i in range(0,1000):
     list_date.append(fake.date_time(tzinfo=None, end_datetime=None))
     list_str.append(fake.pystr(min_chars=0, max_chars=8))
     list_age.append(rd.randint(15,65))
-    list_money.append(rd.random()*9999)
+    list_money_last.append(rd.random()*9999)
+    list_money_current.append(rd.random()*10000)
 
 dic['Index'] = list_index
 dic['Name'] = list_name
@@ -48,10 +51,13 @@ dic['Email'] = list_email
 dic['CarNumber'] = list_car_number
 dic['Date'] = list_date
 dic['Note'] = list_str
-dic['Money'] = list_money
+dic['MoneyLast'] = list_money_last
+dic['MoneyCur'] = list_money_current
 
 df = pd.DataFrame(dic)
 print(df.columns)
-df.to_excel('./TestExcel/AlbertData.xlsx')
-
+writer = pd.ExcelWriter('./TestExcel/AlbertData.xlsx',mode='a',engine='openpyxl')
+df.to_excel(writer,sheet_name="Sheet2")
+writer.save()
+writer.close()
 
